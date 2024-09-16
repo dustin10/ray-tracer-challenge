@@ -169,7 +169,7 @@ fn main() {
     let _ = world.add_entity(cube16);
     let _ = world.add_entity(cube17);
 
-    let mut camera = Camera::from(400, 400, 0.785);
+    let mut camera = Camera::from(640, 480, 0.785);
     camera.transform = Matrix4::view_transform(
         &Vec3::from(-6.0, 6.0, -10.0),
         &Vec3::from(6.0, 0.0, 6.0),

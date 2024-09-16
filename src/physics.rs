@@ -531,10 +531,10 @@ pub fn intersect(ray: &Ray, entity: Rc<RefCell<Entity>>) -> HitTest {
         }
         Shape::Triangle { .. } | Shape::SmoothTriangle { .. } => {
             let local_intersect = local_intersect(&entity.borrow().shape, &local_ray);
-            let (u, v) = local_intersect.uv.expect("uv is set for triangle");
 
             let mut builder = HitTest::builder();
             for t in local_intersect.ts {
+                let (u, v) = local_intersect.uv.expect("uv is set for triangle");
                 builder = builder.add_hit(Hit::on_triangle(t, Rc::clone(&entity), u, v));
             }
 

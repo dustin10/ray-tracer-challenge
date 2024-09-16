@@ -35,7 +35,7 @@ fn main() {
 
     let _ = world.add_entity_ref(obj);
 
-    let mut camera = Camera::from(400, 200, PI_OVER_3);
+    let mut camera = Camera::from(640, 480, PI_OVER_3);
     camera.transform = Matrix4::view_transform(
         &Vec3::from(0.0, 2.0, -15.0),
         &Vec3::y_axis(),
