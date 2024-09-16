@@ -1,0 +1,19 @@
+[package]
+name = "rtc"
+description = "A ray tracer based on the book titled The Ray Tracer Challenge"
+authors = ["Dustin Dobervich <ddobervich@gmail.com>"]
+version = "0.1.0"
+edition = "2021"
+readme = "README.md"
+repository = "https://github.com/dustin10/ray-tracer-challenge"
+rust-version = "1.80"
+
+[workspace]
+
+[dependencies]
+clap = { version = "4.5.16", features = ["derive"] }
+tracing = { version = "0.1.40", features = ["log"] }
+tracing-subscriber = { version = "0.3.18", features = ["json", "env-filter"] }
+
+[dev-dependencies]
+approx = "0.5.1"

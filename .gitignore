@@ -1,0 +1,16 @@
+# rust
+/target/
+**/*.rs.bk
+
+# app
+*.ppm
+/conf/config-local.toml
+
+# ide
+/.idea
+/.vscode
+
+# local dev
+.env
+
+.DS_Store
