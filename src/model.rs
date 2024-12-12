@@ -16,16 +16,19 @@ impl Obj {
     fn new() -> Self {
         Self::default()
     }
-    /// Transforms the [Obj] to an [Entity] which can be rendered in a scene.
-    fn into_entity(self) -> Rc<RefCell<Entity>> {
+}
+
+impl From<Obj> for Rc<RefCell<Entity>> {
+    /// Transforms the [Obj] to a reference counted [REntity] which can be rendered in a scene.
+    fn from(value: Obj) -> Self {
         // TODO: just add them all?
         let entity = Rc::new(RefCell::new(Entity::group()));
-        if !self.groups.is_empty() {
-            for group in self.groups {
+        if !value.groups.is_empty() {
+            for group in value.groups {
                 Entity::add_child(Rc::clone(&entity), group);
             }
         } else {
-            Entity::add_child(Rc::clone(&entity), self.default_group);
+            Entity::add_child(Rc::clone(&entity), value.default_group);
         }
 
         entity
@@ -61,8 +64,7 @@ pub fn load_entity_from_obj_file(path: impl AsRef<Path>) -> Rc<RefCell<Entity>> 
 /// Parses the given [String] containing OBJ file formatted text and transforms it into an [Entity]
 /// which can be rendered in a scene by the ray tracer.
 pub fn load_entity_from_obj(content: String) -> Rc<RefCell<Entity>> {
-    let obj = parse_obj(content);
-    obj.into_entity()
+    parse_obj(content).into()
 }
 
 /// Parses the given [String] containing OBJ file formatted text into an [Obj].
