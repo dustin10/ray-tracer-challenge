@@ -18,11 +18,11 @@ pub struct PointLight {
 }
 
 impl PointLight {
-    /// Creates a new default [PointLight].
+    /// Creates a new default [`PointLight`].
     pub fn new() -> Self {
         PointLight::default()
     }
-    /// Creates a new [PointLight] from the given values.
+    /// Creates a new [`PointLight`] from the given values.
     pub fn from(position: Vec3, intensity: Color) -> Self {
         PointLight {
             position,
@@ -32,19 +32,19 @@ impl PointLight {
 }
 
 impl Default for PointLight {
-    /// Creates a default [PointLight].
+    /// Creates a default [`PointLight`].
     fn default() -> Self {
         PointLight::from(Vec3::zero(), color::WHITE)
     }
 }
 
-/// Defines the behavior required of a pattern that can be applied to a [Material].
+/// Defines the behavior required of a pattern that can be applied to a [`Material`].
 pub trait Pattern {
     /// Returns the transform matrix for the pattern.
     fn transform(&self) -> &Matrix4;
-    /// Returns the [Color] for the given local point.
+    /// Returns the [`Color`] for the given local point.
     fn pattern_at(&self, point: &Vec3) -> Color;
-    /// Returns the [Color] for the pattern applied to the object at the given world point.
+    /// Returns the [`Color`] for the pattern applied to the object at the given world point.
     fn pattern_at_object(&self, entity: Rc<RefCell<Entity>>, point: &Vec3) -> Color {
         let object_point = world_to_object(Rc::clone(&entity), point);
 
@@ -56,7 +56,7 @@ pub trait Pattern {
     }
 }
 
-/// Implementation of a [Pattern] that is striped with two colors.
+/// Implementation of a [`Pattern`] that is striped with two colors.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Stripes {
     pub a: Color,
@@ -65,11 +65,11 @@ pub struct Stripes {
 }
 
 impl Stripes {
-    /// Creates a new [Stripes] with the colors set to white and black.
+    /// Creates a new [`Stripes`] with the colors set to white and black.
     pub fn new() -> Self {
         Self::from(color::WHITE, color::BLACK)
     }
-    /// Creates a new [Stripes] from the given colors.
+    /// Creates a new [`Stripes`] from the given colors.
     pub fn from(a: Color, b: Color) -> Self {
         Self {
             a,
@@ -84,7 +84,7 @@ impl Pattern for Stripes {
     fn transform(&self) -> &Matrix4 {
         &self.transform
     }
-    /// Returns the [Color] for the given local point.
+    /// Returns the [`Color`] for the given local point.
     fn pattern_at(&self, point: &Vec3) -> Color {
         if point.x.floor() as i32 % 2 == 0 {
             self.a
@@ -95,13 +95,13 @@ impl Pattern for Stripes {
 }
 
 impl Default for Stripes {
-    /// Creates a default [Stripes].
+    /// Creates a default [`Stripes`].
     fn default() -> Self {
         Stripes::new()
     }
 }
 
-/// Implementation of a [Pattern] that is a gradient with two colors.
+/// Implementation of a [`Pattern`] that is a gradient with two colors.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Gradient {
     pub a: Color,
@@ -110,11 +110,11 @@ pub struct Gradient {
 }
 
 impl Gradient {
-    /// Creates a new [Gradient] with the colors set to white and black.
+    /// Creates a new [`Gradient`] with the colors set to white and black.
     pub fn new() -> Self {
         Self::from(color::WHITE, color::BLACK)
     }
-    /// Creates a new [Gradient] from the given colors.
+    /// Creates a new [`Gradient`] from the given colors.
     pub fn from(a: Color, b: Color) -> Self {
         Self {
             a,
@@ -129,7 +129,7 @@ impl Pattern for Gradient {
     fn transform(&self) -> &Matrix4 {
         &self.transform
     }
-    /// Returns the [Color] for the given local point.
+    /// Returns the [`Color`] for the given local point.
     fn pattern_at(&self, point: &Vec3) -> Color {
         let distance = self.b - self.a;
         let fraction = point.x - point.x.floor();
@@ -139,13 +139,13 @@ impl Pattern for Gradient {
 }
 
 impl Default for Gradient {
-    /// Creates a default [Gradient].
+    /// Creates a default [`Gradient`].
     fn default() -> Self {
         Gradient::new()
     }
 }
 
-/// Implementation of a [Pattern] that is concentric rings with two colors.
+/// Implementation of a [`Pattern`] that is concentric rings with two colors.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Rings {
     pub a: Color,
@@ -154,11 +154,11 @@ pub struct Rings {
 }
 
 impl Rings {
-    /// Creates a new [Rings] with the colors set to white and black.
+    /// Creates a new [`Rings`] with the colors set to white and black.
     pub fn new() -> Self {
         Self::from(color::WHITE, color::BLACK)
     }
-    /// Creates a new [Rings] from the given colors.
+    /// Creates a new [`Rings`] from the given colors.
     pub fn from(a: Color, b: Color) -> Self {
         Self {
             a,
@@ -173,7 +173,7 @@ impl Pattern for Rings {
     fn transform(&self) -> &Matrix4 {
         &self.transform
     }
-    /// Returns the [Color] for the given local point.
+    /// Returns the [`Color`] for the given local point.
     fn pattern_at(&self, point: &Vec3) -> Color {
         let n = (point.x * point.x) + (point.z + point.z);
         let floor = n.sqrt().floor() as i32;
@@ -187,13 +187,13 @@ impl Pattern for Rings {
 }
 
 impl Default for Rings {
-    /// Creates a default [Rings].
+    /// Creates a default [`Rings`].
     fn default() -> Self {
         Rings::new()
     }
 }
 
-/// Implementation of a [Pattern] that is checkered with two colors.
+/// Implementation of a [`Pattern`] that is checkered with two colors.
 #[derive(Clone, Copy, Debug, PartialEq)]
 pub struct Checkers {
     pub a: Color,
@@ -202,11 +202,11 @@ pub struct Checkers {
 }
 
 impl Checkers {
-    /// Creates a new default [Checkers] pattern consisting of whtie and black.
+    /// Creates a new default [`Checkers`] pattern consisting of whtie and black.
     pub fn new() -> Self {
         Self::from(color::WHITE, color::BLACK)
     }
-    /// Creates a new [Checkers] pattern from the given colors.
+    /// Creates a new [`Checkers`] pattern from the given colors.
     pub fn from(a: Color, b: Color) -> Self {
         Self {
             a,
@@ -221,7 +221,7 @@ impl Pattern for Checkers {
     fn transform(&self) -> &Matrix4 {
         &self.transform
     }
-    /// Returns the [Color] for the given local point.
+    /// Returns the [`Color`] for the given local point.
     fn pattern_at(&self, point: &Vec3) -> Color {
         let floor_x = point.x.floor() as i32;
         let floor_y = point.y.floor() as i32;
@@ -237,7 +237,7 @@ impl Pattern for Checkers {
 }
 
 impl Default for Checkers {
-    /// Creates a default [Checkers] pattern.
+    /// Creates a default [`Checkers`] pattern.
     fn default() -> Self {
         Checkers::new()
     }
@@ -258,14 +258,14 @@ pub struct Material {
 }
 
 impl Material {
-    /// Creates a new default [Material].
+    /// Creates a new default [`Material`].
     pub fn new() -> Self {
         Self::default()
     }
 }
 
 impl Default for Material {
-    /// Creates a new [Material] with default values.
+    /// Creates a new [`Material`] with default values.
     fn default() -> Self {
         Material {
             color: color::WHITE,
@@ -294,7 +294,7 @@ pub struct Camera {
 }
 
 impl Camera {
-    /// Creates a new [Camera] with the given configuration values.
+    /// Creates a new [`Camera`] with the given configuration values.
     pub fn from(hsize: u32, vsize: u32, field_of_view: f32) -> Self {
         let half_view = (field_of_view / 2.0).tan();
         let aspect = hsize as f32 / vsize as f32;
@@ -317,7 +317,7 @@ impl Camera {
     }
 }
 
-/// Calculates the [Color] for a point on an object based on the lighting.
+/// Calculates the [`Color`] for a point on an object based on the lighting.
 pub fn lighting(
     material: &Material,
     entity: Rc<RefCell<Entity>>,
@@ -375,7 +375,7 @@ pub fn is_shadowed(w: &World, p: &Vec3) -> bool {
     matches!(hit_test.hit(), Some(hit) if hit.t < distance)
 }
 
-/// Calculates the [Color] that should be emitted for the [Intersection] in the [World].
+/// Calculates the [`Color`] that should be emitted for the [Intersection] in the [World].
 pub fn shade_hit(w: &World, i: &Intersection, remaining: u32) -> Color {
     let shadowed = is_shadowed(w, &i.over_point);
 
@@ -404,7 +404,7 @@ pub fn shade_hit(w: &World, i: &Intersection, remaining: u32) -> Color {
     }
 }
 
-/// Calculates the [Color] that should be emitted when the [Ray] is cast through the [World].
+/// Calculates the [`Color`] that should be emitted when the [`Ray`] is cast through the [World].
 pub fn color_at(w: &World, r: &Ray, remaining: u32) -> Color {
     let hit_test = intersect_at(w, r);
     let hit = hit_test.hit();
@@ -418,7 +418,7 @@ pub fn color_at(w: &World, r: &Ray, remaining: u32) -> Color {
     }
 }
 
-/// Calculates the [Color] of the reflection at the intersection.
+/// Calculates the [`Color`] of the reflection at the intersection.
 pub fn reflected_color(w: &World, i: &Intersection, remaining: u32) -> Color {
     let reflective = i.entity.borrow().material.reflective;
 
@@ -432,7 +432,7 @@ pub fn reflected_color(w: &World, i: &Intersection, remaining: u32) -> Color {
     Color::from_scaled(&color, reflective)
 }
 
-/// Calculates the refracted [Color] at the intersection.
+/// Calculates the refracted [`Color`] at the intersection.
 pub fn refracted_color(w: &World, i: &Intersection, remaining: u32) -> Color {
     if remaining < 1 || i.entity.borrow().material.transparency == 0.0 {
         return color::BLACK;
@@ -480,7 +480,7 @@ pub fn schlick(i: &Intersection) -> f32 {
     r0 + ((1.0 - r0) * (1.0 - cos).powi(5))
 }
 
-/// A [Canvas] is what the scene is rendered to.
+/// A [`Canvas`] is what the scene is rendered to.
 #[derive(Debug)]
 pub struct Canvas {
     pub width: usize,
@@ -489,11 +489,11 @@ pub struct Canvas {
 }
 
 impl Canvas {
-    /// Creates new [Canvas] of the given size whose pixels are initalized to black.
+    /// Creates new [`Canvas`] of the given size whose pixels are initalized to black.
     pub fn new(width: usize, height: usize) -> Self {
         Canvas::with_fill(width, height, &color::BLACK)
     }
-    /// Creates new [Canvas] of the given size whose pixels are initalized to the fill [Color].
+    /// Creates new [`Canvas`] of the given size whose pixels are initalized to the fill [`Color`].
     pub fn with_fill(width: usize, height: usize, c: &color::Color) -> Self {
         let cap = width * height;
         let mut pixels = Vec::with_capacity(cap);
@@ -508,7 +508,7 @@ impl Canvas {
             pixels,
         }
     }
-    /// Writes the [Color] to the specified pixel.
+    /// Writes the [`Color`] to the specified pixel.
     pub fn write_pixel(&mut self, x: usize, y: usize, c: &color::Color) {
         let idx = (y * self.width) + x;
         if idx >= self.pixels.len() {
@@ -518,7 +518,7 @@ impl Canvas {
             self.pixels[idx] = *c;
         }
     }
-    /// Retrieves the [Color] at the given pixel coordinates if available. Returns white if the
+    /// Retrieves the [`Color`] at the given pixel coordinates if available. Returns white if the
     /// pixel requested is out of bounds.
     pub fn pixel_at(&self, x: usize, y: usize) -> Option<&color::Color> {
         // return white if outside bounds
@@ -555,7 +555,7 @@ impl Canvas {
     }
 }
 
-/// Creates a [Ray] from the [Camera] to the pixel.
+/// Creates a [`Ray`] from the [`Camera`] to the pixel.
 pub fn ray_for_pixel(c: &Camera, x: u32, y: u32) -> Ray {
     let xoffset = (x as f32 + 0.5) * c.pixel_size;
     let yoffset = (y as f32 + 0.5) * c.pixel_size;
@@ -574,7 +574,7 @@ pub fn ray_for_pixel(c: &Camera, x: u32, y: u32) -> Ray {
     Ray::from(origin, direction)
 }
 
-/// Renders the [World] onto a [Canvas] as seen through the [Camera].
+/// Renders the [World] onto a [`Canvas`] as seen through the [`Camera`].
 pub fn render(c: &Camera, w: &World) -> Canvas {
     let mut image = Canvas::new(c.hsize as usize, c.vsize as usize);
 

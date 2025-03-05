@@ -54,13 +54,13 @@ struct LocalIntersect {
 }
 
 impl LocalIntersect {
-    /// Creates a new [LocalIntersect] fron the given values.
+    /// Creates a new [`LocalIntersect`] fron the given values.
     fn from(ts: Vec<f32>, uv: Option<(f32, f32)>) -> Self {
         Self { ts, uv }
     }
 }
 
-/// Calculates the positions of intersections along the [Ray] for the [Shape] if any.
+/// Calculates the positions of intersections along the [`Ray`] for the [`Shape`] if any.
 fn local_intersect(shape: &Shape, ray: &Ray) -> LocalIntersect {
     match shape {
         Shape::Sphere { origin, .. } => local_intersect_sphere(ray, origin),
@@ -83,7 +83,7 @@ fn local_intersect(shape: &Shape, ray: &Ray) -> LocalIntersect {
     }
 }
 
-/// Calculates the normal at the given point on the [Shape].
+/// Calculates the normal at the given point on the [`Shape`].
 fn local_normal_at(shape: &Shape, point: &Vec3, hit: Option<&Hit>) -> Vec3 {
     const ORIGIN: Vec3 = Vec3::zero();
 
@@ -144,7 +144,7 @@ fn local_normal_at(shape: &Shape, point: &Vec3, hit: Option<&Hit>) -> Vec3 {
     }
 }
 
-/// Calculates the positions of intersections along the [Ray] for a sphere.
+/// Calculates the positions of intersections along the [`Ray`] for a sphere.
 fn local_intersect_sphere(ray: &Ray, origin: &Vec3) -> LocalIntersect {
     let shape_to_ray = ray.origin - *origin;
 
@@ -168,7 +168,7 @@ fn local_intersect_sphere(ray: &Ray, origin: &Vec3) -> LocalIntersect {
     LocalIntersect::from(hits, None)
 }
 
-/// Calculates the positions of intersections along the [Ray] for a plane.
+/// Calculates the positions of intersections along the [`Ray`] for a plane.
 fn local_intersect_plane(ray: &Ray) -> LocalIntersect {
     let mut hits = Vec::with_capacity(1);
     if ray.direction.y.abs() < EPSILON {
@@ -181,7 +181,7 @@ fn local_intersect_plane(ray: &Ray) -> LocalIntersect {
     LocalIntersect::from(hits, None)
 }
 
-/// Calculates the positions of intersections along the [Ray] for a cube.
+/// Calculates the positions of intersections along the [`Ray`] for a cube.
 fn local_intersect_cube(ray: &Ray) -> LocalIntersect {
     let (xtmin, xtmax) = check_axis_cube(ray.origin.x, ray.direction.x);
     let (ytmin, ytmax) = check_axis_cube(ray.origin.y, ray.direction.y);
@@ -221,7 +221,7 @@ fn check_axis_cube(o: f32, d: f32) -> (f32, f32) {
     (tmin, tmax)
 }
 
-/// Calculates the positions of intersections along the [Ray] for a cylinder.
+/// Calculates the positions of intersections along the [`Ray`] for a cylinder.
 fn local_intersect_cylinder(ray: &Ray, minimum: f32, maximum: f32, closed: bool) -> LocalIntersect {
     let mut hits = Vec::new();
 
@@ -292,7 +292,7 @@ fn check_cap_cylinder(ray: &Ray, t: f32) -> bool {
     x.powi(2) + z.powi(2) <= 1.0 + EPSILON
 }
 
-/// Calculates the positions of intersections along the [Ray] for a cone.
+/// Calculates the positions of intersections along the [`Ray`] for a cone.
 fn local_intersect_cone(ray: &Ray, minimum: f32, maximum: f32, closed: bool) -> LocalIntersect {
     let mut hits = Vec::new();
 
@@ -369,7 +369,7 @@ fn check_cap_cone(ray: &Ray, t: f32, y: f32) -> bool {
     x.powi(2) + z.powi(2) <= y + EPSILON
 }
 
-/// Calculates the positions of intersections along the [Ray] for a triangle.
+/// Calculates the positions of intersections along the [`Ray`] for a triangle.
 fn local_intersect_triangle(ray: &Ray, p1: &Vec3, e1: &Vec3, e2: &Vec3) -> LocalIntersect {
     let dir_cross_e2 = Vec3::from_cross(&ray.direction, e2);
     let det = e1.dot(&dir_cross_e2);
@@ -398,7 +398,7 @@ fn local_intersect_triangle(ray: &Ray, p1: &Vec3, e1: &Vec3, e2: &Vec3) -> Local
     LocalIntersect::from(vec![t], Some((u, v)))
 }
 
-/// Builder struct that allows for ease of creating a [HitTest] that has any hits sorted with the
+/// Builder struct that allows for ease of creating a [`HitTest`] that has any hits sorted with the
 /// correct ordering.
 #[derive(Clone, Default)]
 pub struct HitTestBuilder {
@@ -406,17 +406,17 @@ pub struct HitTestBuilder {
 }
 
 impl HitTestBuilder {
-    /// Creates a new default [HitTestBuilder].
+    /// Creates a new default [`HitTestBuilder`].
     pub fn new() -> Self {
         HitTestBuilder::default()
     }
-    /// Adds a [Hit] to the builder.
+    /// Adds a [`Hit`] to the builder.
     pub fn add_hit(mut self, hit: Hit) -> Self {
         self.hits.push(hit);
 
         self
     }
-    /// Sorts any [Hit]s that were added and then creates the [HitTest].
+    /// Sorts any [`Hit`]s that were added and then creates the [`HitTest`].
     pub fn build(mut self) -> HitTest {
         self.hits
             .sort_by(|a, b| a.t.partial_cmp(&b.t).expect("f32 has ordering"));
@@ -434,7 +434,7 @@ pub struct Hit {
 }
 
 impl Hit {
-    /// Creates a new [Hit] from the specified location and entity.
+    /// Creates a new [`Hit`] from the specified location and entity.
     pub fn from(t: f32, entity: Rc<RefCell<Entity>>) -> Self {
         Hit {
             t,
@@ -464,23 +464,23 @@ pub struct HitTest {
 }
 
 impl HitTest {
-    /// Creates a new default [HitTestBuilder].
+    /// Creates a new default [`HitTestBuilder`].
     pub fn builder() -> HitTestBuilder {
         HitTestBuilder::new()
     }
-    /// Creates a new empty [HitTest].
+    /// Creates a new empty [`HitTest`].
     pub fn empty() -> Self {
         Self::with_hits(vec![])
     }
-    /// Creates a new [HitTest] initialized with the given hits.
+    /// Creates a new [`HitTest`] initialized with the given hits.
     fn with_hits(hits: Vec<Hit>) -> Self {
         Self { hits }
     }
-    /// Returns all of the [Hit]s from the test.
+    /// Returns all of the [`Hit`]s from the test.
     pub fn hits(&self) -> &Vec<Hit> {
         &self.hits
     }
-    /// Returns the valid [Hit] from the hit test if it exists.
+    /// Returns the valid [`Hit`] from the hit test if it exists.
     pub fn hit(&self) -> Option<&Hit> {
         for hit in self.hits.iter() {
             if hit.t < 0.0 {
@@ -510,7 +510,7 @@ pub struct Intersection {
     pub n2: f32,
 }
 
-/// Performs a hit test for the [Ray] against the specified [Entity].
+/// Performs a hit test for the [`Ray`] against the specified [`Entity`].
 pub fn intersect(ray: &Ray, entity: Rc<RefCell<Entity>>) -> HitTest {
     let e = entity.borrow();
 
@@ -553,7 +553,7 @@ pub fn intersect(ray: &Ray, entity: Rc<RefCell<Entity>>) -> HitTest {
     }
 }
 
-/// Computes the normal vector for the given [Entity] at the point in world space.
+/// Computes the normal vector for the given [`Entity`] at the point in world space.
 pub fn normal_at(entity: Rc<RefCell<Entity>>, world_point: &Vec3, hit: &Hit) -> Vec3 {
     let local_point = world_to_object(Rc::clone(&entity), world_point);
     let local_normal = local_normal_at(&entity.borrow().shape, &local_point, Some(hit));
@@ -561,13 +561,13 @@ pub fn normal_at(entity: Rc<RefCell<Entity>>, world_point: &Vec3, hit: &Hit) -> 
     normal_to_world(entity, &local_normal)
 }
 
-/// Reflects the given [Vec3] across the normal vector.
+/// Reflects the given [`Vec3`] across the normal vector.
 pub fn reflect(v: &Vec3, normal: &Vec3) -> Vec3 {
     let scaled_normal = Vec3::from_scaled(normal, 2.0 * Vec3::dot(v, normal));
     *v - scaled_normal
 }
 
-/// Performs a hit test for each entity in the [World] with the given [Ray].
+/// Performs a hit test for each entity in the [`World`] with the given [`Ray`].
 pub fn intersect_at(w: &World, r: &Ray) -> HitTest {
     let mut world_test = HitTest::builder();
     for obj in w.entities() {
@@ -580,7 +580,7 @@ pub fn intersect_at(w: &World, r: &Ray) -> HitTest {
     world_test.build()
 }
 
-/// Given a [Hit] and the [Ray], computes all of the data about the intersetion required for
+/// Given a [`Hit`] and the [`Ray`], computes all of the data about the intersetion required for
 /// rendering.
 pub fn prepare_computations(hit: &Hit, r: &Ray, hits: &Vec<Hit>) -> Intersection {
     let point = Ray::position(r, hit.t);

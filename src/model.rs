@@ -2,7 +2,7 @@ use crate::{entity::Entity, math::Vec3};
 
 use std::{cell::RefCell, path::Path, rc::Rc};
 
-/// Results of parsing an OBJ file that can be transformed into an [Entity].
+/// Results of parsing an OBJ file that can be transformed into an [`Entity`].
 struct Obj {
     unrecognized: u32,
     vertices: Vec<Vec3>,
@@ -12,14 +12,14 @@ struct Obj {
 }
 
 impl Obj {
-    /// Creates a new default [Obj].
+    /// Creates a new default [`Obj`].
     fn new() -> Self {
         Self::default()
     }
 }
 
 impl From<Obj> for Rc<RefCell<Entity>> {
-    /// Transforms the [Obj] to a reference counted [Entity] which can be rendered in a scene.
+    /// Transforms the [`Obj`] to a reference counted [`Entity`] which can be rendered in a scene.
     fn from(value: Obj) -> Self {
         // TODO: just add them all?
         let entity = Rc::new(RefCell::new(Entity::group()));
@@ -36,7 +36,7 @@ impl From<Obj> for Rc<RefCell<Entity>> {
 }
 
 impl Default for Obj {
-    /// Creates a new default [Obj].
+    /// Creates a new default [`Obj`].
     fn default() -> Self {
         Self {
             unrecognized: 0,
@@ -54,20 +54,20 @@ struct FaceVertex {
     normal: Option<Vec3>,
 }
 
-/// Parses an OBJ file from disk at the given path and transforms it into an [Entity] which can be
+/// Parses an OBJ file from disk at the given path and transforms it into an [`Entity`] which can be
 /// rendered in a scene by the ray tracer.
 pub fn load_entity_from_obj_file(path: impl AsRef<Path>) -> Rc<RefCell<Entity>> {
     let content = std::fs::read_to_string(path).expect("valid file path");
     load_entity_from_obj(content)
 }
 
-/// Parses the given [String] containing OBJ file formatted text and transforms it into an [Entity]
+/// Parses the given [`String`] containing OBJ file formatted text and transforms it into an [`Entity`]
 /// which can be rendered in a scene by the ray tracer.
 pub fn load_entity_from_obj(content: String) -> Rc<RefCell<Entity>> {
     parse_obj(content).into()
 }
 
-/// Parses the given [String] containing OBJ file formatted text into an [Obj].
+/// Parses the given [`String`] containing OBJ file formatted text into an [`Obj`].
 fn parse_obj(content: String) -> Obj {
     let mut obj = Obj::new();
 
