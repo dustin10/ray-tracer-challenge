@@ -24,16 +24,16 @@ pub struct Entity {
 }
 
 impl Entity {
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Sphere] of radius one.
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Sphere`] of radius one.
     pub fn sphere() -> Self {
         Self::sphere_from(Vec3::origin(), 1.0)
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Sphere] with the given radius.
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Sphere`] with the given radius.
     pub fn sphere_from(origin: Vec3, radius: f32) -> Self {
         Self::new(Shape::Sphere { origin, radius })
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Sphere] of radius one and whose
-    /// [Material] is configured to have a glass effect.
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Sphere`] of radius one and whose
+    /// [`Material`] is configured to have a glass effect.
     pub fn glass_sphere() -> Self {
         let mut s = Self::sphere();
         s.material.transparency = 1.0;
@@ -41,20 +41,20 @@ impl Entity {
 
         s
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Plane].
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Plane`].
     pub fn plane() -> Self {
         Self::new(Shape::Plane)
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Cube].
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Cube`].
     pub fn cube() -> Self {
         Self::new(Shape::Cube)
     }
-    /// Creates a new [Entity] whose [Shape] is set to a closed [Shape::Cylinder] with min and max
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a closed [`Shape::Cylinder`] with min and max
     /// set to negative and positive infinity repsectively.
     pub fn cylinder() -> Self {
         Self::cylinder_from(-f32::INFINITY, f32::INFINITY, false)
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Cylinder] with created from the
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Cylinder`] with created from the
     /// given values.
     pub fn cylinder_from(minimum: f32, maximum: f32, closed: bool) -> Self {
         Self::new(Shape::Cylinder {
@@ -63,12 +63,12 @@ impl Entity {
             closed,
         })
     }
-    /// Creates a new [Entity] whose [Shape] is set to a closed [Shape::Cone] with min and max
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a closed [`Shape::Cone`] with min and max
     /// set to negative and positive infinity repsectively.
     pub fn cone() -> Self {
         Self::cone_from(-f32::INFINITY, f32::INFINITY, false)
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Cone] with created from the
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Cone`] with created from the
     /// given values.
     pub fn cone_from(minimum: f32, maximum: f32, closed: bool) -> Self {
         Self::new(Shape::Cone {
@@ -77,16 +77,16 @@ impl Entity {
             closed,
         })
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Group].
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Group`].
     pub fn group() -> Self {
         Self::new(Shape::Group)
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Triangle] whose points are at -1
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Triangle`] whose points are at -1
     /// and 1 on the x-axis as well as 1 on the y-axis.
     pub fn triangle() -> Self {
         Self::triangle_from(Vec3::neg_x_axis(), Vec3::y_axis(), Vec3::x_axis())
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::Triangle] with the given points.
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::Triangle`] with the given points.
     pub fn triangle_from(p1: Vec3, p2: Vec3, p3: Vec3) -> Self {
         let e1 = p2 - p1;
         let e2 = p3 - p1;
@@ -103,7 +103,7 @@ impl Entity {
             normal,
         })
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::SmoothTriangle] whose points are
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::SmoothTriangle`] whose points are
     /// at -1 and 1 on the x-axis as well as 1 on the y-axis.
     pub fn smooth_triangle() -> Self {
         Self::smooth_triangle_from(
@@ -115,7 +115,7 @@ impl Entity {
             Vec3::x_axis(),
         )
     }
-    /// Creates a new [Entity] whose [Shape] is set to a [Shape::SmoothTriangle] with the given
+    /// Creates a new [`Entity`] whose [`Shape`] is set to a [`Shape::SmoothTriangle`] with the given
     /// values.
     pub fn smooth_triangle_from(
         p1: Vec3,
@@ -142,7 +142,7 @@ impl Entity {
             n3,
         })
     }
-    /// Creates a new [Entity] with the given [Shape].
+    /// Creates a new [`Entity`] with the given [`Shape`].
     fn new(shape: Shape) -> Self {
         Self {
             id: NEXT_ENTITY_ID.fetch_add(1, Ordering::SeqCst),
@@ -168,7 +168,7 @@ impl Entity {
 }
 
 impl Default for Entity {
-    /// Creates a default [Entity]. The default [Entity] is a sphere of radius one at the origin.
+    /// Creates a default [`Entity`]. The default [`Entity`] is a sphere of radius one at the origin.
     fn default() -> Self {
         Entity::sphere()
     }
@@ -182,29 +182,29 @@ pub struct World {
 }
 
 impl World {
-    /// Creates a new empty [World].
+    /// Creates a new empty [`World`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Returns a reference to the [Vec] containing the [Entity] values that exist in the world.
+    /// Returns a reference to the [`Vec`] containing the [`Entity`] values that exist in the world.
     pub fn entities(&self) -> &Vec<Rc<RefCell<Entity>>> {
         &self.entities
     }
-    /// Adds a raw [Entity] to the world and returns a mutable reference to it.
+    /// Adds a raw [`Entity`] to the world and returns a mutable reference to it.
     pub fn add_entity(&mut self, entity: Entity) -> Rc<RefCell<Entity>> {
         let entity = Rc::new(RefCell::new(entity));
         self.entities.push(Rc::clone(&entity));
         entity
     }
-    /// Adds an existing [Entity] reference to the world.
+    /// Adds an existing [`Entity`] reference to the world.
     pub fn add_entity_ref(&mut self, entity: Rc<RefCell<Entity>>) {
         self.entities.push(Rc::clone(&entity));
     }
-    /// Retruns a reference to the [PointLight] which is lighting the world.
+    /// Retruns a reference to the [`PointLight`] which is lighting the world.
     pub fn light(&self) -> &PointLight {
         &self.light
     }
-    /// Sets the [PointLight] which is lighting the world.
+    /// Sets the [`PointLight`] which is lighting the world.
     pub fn set_light(&mut self, light: PointLight) {
         self.light = light;
     }

@@ -19,7 +19,7 @@ impl Obj {
 }
 
 impl From<Obj> for Rc<RefCell<Entity>> {
-    /// Transforms the [Obj] to a reference counted [REntity] which can be rendered in a scene.
+    /// Transforms the [Obj] to a reference counted [Entity] which can be rendered in a scene.
     fn from(value: Obj) -> Self {
         // TODO: just add them all?
         let entity = Rc::new(RefCell::new(Entity::group()));

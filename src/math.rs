@@ -8,53 +8,53 @@ pub struct Vec2 {
 }
 
 impl Vec2 {
-    /// Creates a new default [Vec2].
+    /// Creates a new default [`Vec2`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Vec2] initialized to zero values.
+    /// Creates a new [`Vec2`] initialized to zero values.
     pub const fn zero() -> Self {
         Self { x: 0.0, y: 0.0 }
     }
-    /// Creates a new [Vec2] initialized from the specified values.
+    /// Creates a new [`Vec2`] initialized from the specified values.
     pub const fn from(x: f32, y: f32) -> Self {
         Self { x, y }
     }
-    /// Creates a new [Vec2] at the origin.
+    /// Creates a new [`Vec2`] at the origin.
     pub const fn origin() -> Self {
         Self::zero()
     }
-    /// Creates a new [Vec2] that is directed along the x-axis.
+    /// Creates a new [`Vec2`] that is directed along the x-axis.
     pub const fn x_axis() -> Self {
         Self { x: 1.0, y: 0.0 }
     }
-    /// Creates a new [Vec2] that is directed along the negative x-axis.
+    /// Creates a new [`Vec2`] that is directed along the negative x-axis.
     pub const fn neg_x_axis() -> Self {
         Self { x: -1.0, y: 0.0 }
     }
-    /// Creates a new [Vec2] that is directed along the y-axis.
+    /// Creates a new [`Vec2`] that is directed along the y-axis.
     pub const fn y_axis() -> Self {
         Self { x: 0.0, y: 1.0 }
     }
-    /// Creates a new [Vec2] that is directed along the negative y-axis.
+    /// Creates a new [`Vec2`] that is directed along the negative y-axis.
     pub const fn neg_y_axis() -> Self {
         Self { x: 0.0, y: -1.0 }
     }
-    /// Creates a new [Vec2] that is initialized with the normalized values
-    /// from the given [Vec2].
+    /// Creates a new [`Vec2`] that is initialized with the normalized values
+    /// from the given [`Vec2`].
     pub fn from_normalized(v: &Self) -> Self {
         let mut n = *v;
         n.normalize();
         n
     }
-    /// Creates a new [Vec2] that is initialized with the scaled values from
-    /// the given [Vec2].
+    /// Creates a new [`Vec2`] that is initialized with the scaled values from
+    /// the given [`Vec2`].
     pub fn from_scaled(v: &Self, s: f32) -> Self {
         let mut r = *v;
         r.scale(s);
         r
     }
-    /// Calculates the dot product of the vector with the given [Vec2].
+    /// Calculates the dot product of the vector with the given [`Vec2`].
     pub fn dot(&self, v: &Self) -> f32 {
         (self.x * v.x) + (self.y * v.y)
     }
@@ -104,11 +104,11 @@ pub struct Vec3 {
 }
 
 impl Vec3 {
-    /// Creates a new default [Vec3].
+    /// Creates a new default [`Vec3`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Vec3] initialized to zero values.
+    /// Creates a new [`Vec3`] initialized to zero values.
     pub const fn zero() -> Self {
         Self {
             x: 0.0,
@@ -116,15 +116,15 @@ impl Vec3 {
             z: 0.0,
         }
     }
-    /// Creates a new [Vec3] initialized with the specified values.
+    /// Creates a new [`Vec3`] initialized with the specified values.
     pub const fn from(x: f32, y: f32, z: f32) -> Self {
         Self { x, y, z }
     }
-    /// Creates a new [Vec3] at the origin.
+    /// Creates a new [`Vec3`] at the origin.
     pub const fn origin() -> Self {
         Self::zero()
     }
-    /// Creates a new [Vec3] that is directed along the x-axis.
+    /// Creates a new [`Vec3`] that is directed along the x-axis.
     pub const fn x_axis() -> Self {
         Self {
             x: 1.0,
@@ -132,7 +132,7 @@ impl Vec3 {
             z: 0.0,
         }
     }
-    /// Creates a new [Vec3] that is directed along the negative x-axis.
+    /// Creates a new [`Vec3`] that is directed along the negative x-axis.
     pub const fn neg_x_axis() -> Self {
         Self {
             x: -1.0,
@@ -140,7 +140,7 @@ impl Vec3 {
             z: 0.0,
         }
     }
-    /// Creates a new [Vec3] that is directed along the y-axis.
+    /// Creates a new [`Vec3`] that is directed along the y-axis.
     pub const fn y_axis() -> Self {
         Self {
             x: 0.0,
@@ -148,7 +148,7 @@ impl Vec3 {
             z: 0.0,
         }
     }
-    /// Creates a new [Vec3] that is directed along the negative y-axis.
+    /// Creates a new [`Vec3`] that is directed along the negative y-axis.
     pub const fn neg_y_axis() -> Self {
         Self {
             x: 0.0,
@@ -156,7 +156,7 @@ impl Vec3 {
             z: 0.0,
         }
     }
-    /// Creates a new [Vec3] that is directed along the z-axis.
+    /// Creates a new [`Vec3`] that is directed along the z-axis.
     pub const fn z_axis() -> Self {
         Self {
             x: 0.0,
@@ -164,7 +164,7 @@ impl Vec3 {
             z: 1.0,
         }
     }
-    /// Creates a new [Vec3] that is directed along the negative z-axis.
+    /// Creates a new [`Vec3`] that is directed along the negative z-axis.
     pub const fn neg_z_axis() -> Self {
         Self {
             x: 0.0,
@@ -172,21 +172,21 @@ impl Vec3 {
             z: -1.0,
         }
     }
-    /// Creates a new [Vec3] that is initialized with the normalized values
-    /// from the given [Vec3].
+    /// Creates a new [`Vec3`] that is initialized with the normalized values
+    /// from the given [`Vec3`].
     pub fn from_normalized(v: &Self) -> Self {
         let mut n = *v;
         n.normalize();
         n
     }
-    /// Creates a new [Vec3] that is initialized with the scaled values from
-    /// the given [Vec3].
+    /// Creates a new [`Vec3`] that is initialized with the scaled values from
+    /// the given [`Vec3`].
     pub fn from_scaled(v: &Self, s: f32) -> Self {
         let mut r = *v;
         r.scale(s);
         r
     }
-    /// Creates a new [Vec3] that is the cross product from the two given vectors.
+    /// Creates a new [`Vec3`] that is the cross product from the two given vectors.
     pub fn from_cross(a: &Self, b: &Self) -> Self {
         let x = a.y * b.z - a.z * b.y;
         let y = a.z * b.x - a.x * b.z;
@@ -208,11 +208,11 @@ impl Vec3 {
         self.y *= s;
         self.z *= s;
     }
-    /// Calculates the dot product of the vector with the given [Vec3].
+    /// Calculates the dot product of the vector with the given [`Vec3`].
     pub fn dot(&self, v: &Self) -> f32 {
         (self.x * v.x) + (self.y * v.y) + (self.z * v.z)
     }
-    /// Transforms the vector to the result of the cross product with the given [Vec3].
+    /// Transforms the vector to the result of the cross product with the given [`Vec3`].
     pub fn cross(&mut self, v: &Vec3) {
         let x = self.y * v.z - self.z * v.y;
         let y = self.z * v.x - self.x * v.z;
@@ -250,7 +250,7 @@ impl Sub for Vec3 {
 impl Mul for Vec3 {
     type Output = Vec3;
 
-    /// Creates a new [Vec3] that is the cross product from the two given vectors.
+    /// Creates a new [`Vec3`] that is the cross product from the two given vectors.
     fn mul(self, rhs: Self) -> Self::Output {
         Vec3::from_cross(&self, &rhs)
     }
@@ -267,11 +267,11 @@ pub struct Vec4 {
 }
 
 impl Vec4 {
-    /// Creates a new default [Vec4].
+    /// Creates a new default [`Vec4`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Vec4] initialized to zero values.
+    /// Creates a new [`Vec4`] initialized to zero values.
     pub const fn zero() -> Self {
         Self {
             x: 0.0,
@@ -280,19 +280,19 @@ impl Vec4 {
             w: 0.0,
         }
     }
-    /// Creates a new [Vec4] that is initialized with the given values.
+    /// Creates a new [`Vec4`] that is initialized with the given values.
     pub const fn from(x: f32, y: f32, z: f32, w: f32) -> Self {
         Self { x, y, z, w }
     }
-    /// Creates a new [Vec4] that is initialized with the normalized values
-    /// from the given [Vec4].
+    /// Creates a new [`Vec4`] that is initialized with the normalized values
+    /// from the given [`Vec4`].
     pub fn from_normalized(v: &Self) -> Self {
         let mut n = *v;
         n.normalize();
         n
     }
-    /// Creates a new [Vec4] that is initialized with the scaled values from
-    /// the given [Vec4].
+    /// Creates a new [`Vec4`] that is initialized with the scaled values from
+    /// the given [`Vec4`].
     pub fn from_scaled(v: &Self, s: f32) -> Self {
         let mut r = *v;
         r.scale(s);
@@ -314,7 +314,7 @@ impl Vec4 {
         self.z *= s;
         self.w *= s;
     }
-    /// Calculates the dot product of the vector with the given [Vec4].
+    /// Calculates the dot product of the vector with the given [`Vec4`].
     pub fn dot(&self, v: &Self) -> f32 {
         (self.x * v.x) + (self.y * v.y) + (self.z * v.z) + (self.w * v.w)
     }
@@ -360,15 +360,15 @@ pub struct Matrix2 {
 }
 
 impl Matrix2 {
-    /// Creates a new default [Matrix2].
+    /// Creates a new default [`Matrix2`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Matrix2] with zero values.
+    /// Creates a new [`Matrix2`] with zero values.
     pub fn zero() -> Self {
         Self::default()
     }
-    /// Creates a new [Matrix2] with values set to the identity.
+    /// Creates a new [`Matrix2`] with values set to the identity.
     pub fn identity() -> Self {
         let mut m = Self::zero();
         m.data[0] = 1.0;
@@ -376,7 +376,7 @@ impl Matrix2 {
 
         m
     }
-    /// Creates a new [Matrix2] from the result of the addition of the two given matrices.
+    /// Creates a new [`Matrix2`] from the result of the addition of the two given matrices.
     pub fn add(a: &Self, b: &Self) -> Self {
         let mut m = Matrix2::zero();
         for i in 0..m.data.len() {
@@ -385,7 +385,7 @@ impl Matrix2 {
 
         m
     }
-    /// Creates a new [Matrix2] from the result of the difference of the two given matrices.
+    /// Creates a new [`Matrix2`] from the result of the difference of the two given matrices.
     pub fn sub(a: &Self, b: &Self) -> Self {
         let mut m = Matrix2::zero();
         for i in 0..m.data.len() {
@@ -439,15 +439,15 @@ pub struct Matrix3 {
 }
 
 impl Matrix3 {
-    /// Creates a new [Matrix3] with zero values.
+    /// Creates a new [`Matrix3`] with zero values.
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Matrix3] with zero values.
+    /// Creates a new [`Matrix3`] with zero values.
     pub fn zero() -> Self {
         Self::default()
     }
-    /// Creates a new [Matrix3] with values set to the identity.
+    /// Creates a new [`Matrix3`] with values set to the identity.
     pub fn identity() -> Self {
         let mut m = Self::zero();
         m.data[0] = 1.0;
@@ -456,7 +456,7 @@ impl Matrix3 {
 
         m
     }
-    /// Creates a new [Matrix3] that is the transpose of the given matrix.
+    /// Creates a new [`Matrix3`] that is the transpose of the given matrix.
     pub fn from_transpose(m: &Self) -> Self {
         let mut t = Self::zero();
 
@@ -474,7 +474,7 @@ impl Matrix3 {
 
         t
     }
-    /// Returns the inverse of the given [Matrix3] if the matrix is invertible.
+    /// Returns the inverse of the given [`Matrix3`] if the matrix is invertible.
     pub fn from_inverse(m: &Self) -> Option<Self> {
         let d = m.det();
         if d == 0.0 {
@@ -493,7 +493,7 @@ impl Matrix3 {
 
         Some(inv)
     }
-    /// Creates a new [Matrix3] from the result of the addition of the two matrices.
+    /// Creates a new [`Matrix3`] from the result of the addition of the two matrices.
     pub fn add(a: &Self, b: &Self) -> Self {
         let mut m = Matrix3::zero();
         for i in 0..m.data.len() {
@@ -502,7 +502,7 @@ impl Matrix3 {
 
         m
     }
-    /// Creates a new [Matrix3] from the result of the difference of the two matrices.
+    /// Creates a new [`Matrix3`] from the result of the difference of the two matrices.
     pub fn sub(a: &Self, b: &Self) -> Self {
         let mut m = Matrix3::zero();
         for i in 0..m.data.len() {
@@ -511,7 +511,7 @@ impl Matrix3 {
 
         m
     }
-    /// Multiplies a [Matrix3] by the given [Vec3] and returns the result.
+    /// Multiplies a [`Matrix3`] by the given [`Vec3`] and returns the result.
     pub fn mul_vec3(m: &Self, v: &Vec3) -> Vec3 {
         let x = (m.data[0] * v.x) + (m.data[1] * v.y) + (m.data[2] * v.z);
         let y = (m.data[3] * v.x) + (m.data[4] * v.y) + (m.data[5] * v.z);
@@ -527,7 +527,7 @@ impl Matrix3 {
     pub fn set(&mut self, r: usize, c: usize, val: f32) {
         self.data[(r * 3) + c] = val;
     }
-    /// Returns the sub-matrix created from the [Matrix3] by removing the specified zero-based
+    /// Returns the sub-matrix created from the [`Matrix3`] by removing the specified zero-based
     /// row and column.
     #[allow(clippy::collapsible_else_if)]
     pub fn submat(&self, xr: usize, xc: usize) -> Matrix2 {
@@ -647,15 +647,15 @@ pub struct Matrix4 {
 }
 
 impl Matrix4 {
-    /// Creates a new default [Matrix4].
+    /// Creates a new default [`Matrix4`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Matrix4] with zero values.
+    /// Creates a new [`Matrix4`] with zero values.
     pub fn zero() -> Self {
         Self::default()
     }
-    /// Creates a new [Matrix4] with values set to the identity.
+    /// Creates a new [`Matrix4`] with values set to the identity.
     pub fn identity() -> Self {
         let mut m = Self::zero();
 
@@ -666,7 +666,7 @@ impl Matrix4 {
 
         m
     }
-    /// Creates a new [Matrix4] that is the transpose of the given matrix.
+    /// Creates a new [`Matrix4`] that is the transpose of the given matrix.
     pub fn from_transpose(m: &Self) -> Self {
         let mut t = Self::zero();
 
@@ -692,14 +692,14 @@ impl Matrix4 {
 
         t
     }
-    /// Creates a new [Matrix4] by scaling all of the elements from the existing matrix by the
+    /// Creates a new [`Matrix4`] by scaling all of the elements from the existing matrix by the
     /// given scalar value.
     pub fn from_scaled(m: &Self, s: f32) -> Self {
         let mut r = *m;
         r.data.iter_mut().for_each(|v| *v *= s);
         r
     }
-    /// Creates a new [Matrix4] that is the inverse of the given matrix if the matrix is
+    /// Creates a new [`Matrix4`] that is the inverse of the given matrix if the matrix is
     /// invertible.
     pub fn from_inverse(m: &Self) -> Option<Self> {
         let d = Matrix4::det(m);
@@ -719,7 +719,7 @@ impl Matrix4 {
 
         Some(inv)
     }
-    /// Creates a new [Matrix4] that represents a view transformation.
+    /// Creates a new [`Matrix4`] that represents a view transformation.
     pub fn view_transform(from: &Vec3, to: &Vec3, up: &Vec3) -> Self {
         let mut forward = *to - *from;
         forward.normalize();
@@ -745,7 +745,7 @@ impl Matrix4 {
 
         orientation * translate
     }
-    /// Creates a new [Matrix4] that represents a translation transformation.
+    /// Creates a new [`Matrix4`] that represents a translation transformation.
     pub fn op_translate(x: f32, y: f32, z: f32) -> Self {
         let mut m = Self::identity();
         m.data[3] = x;
@@ -754,11 +754,11 @@ impl Matrix4 {
 
         m
     }
-    /// Creates a new [Matrix4] that represents a translation transformation.
+    /// Creates a new [`Matrix4`] that represents a translation transformation.
     pub fn op_translate_vec(v: &Vec3) -> Self {
         Self::op_translate(v.x, v.y, v.z)
     }
-    /// Creates a new [Matrix4] that represents a scaling transformation.
+    /// Creates a new [`Matrix4`] that represents a scaling transformation.
     pub fn op_scale(x: f32, y: f32, z: f32) -> Self {
         let mut m = Self::identity();
         m.data[0] = x;
@@ -767,11 +767,11 @@ impl Matrix4 {
 
         m
     }
-    /// Creates a new [Matrix4] that represents a scaling transformation.
+    /// Creates a new [`Matrix4`] that represents a scaling transformation.
     pub fn op_scale_vec(v: &Vec3) -> Self {
         Self::op_scale(v.x, v.y, v.z)
     }
-    /// Creates a new [Matrix4] that represents a rotation transformation around the x-axis.
+    /// Creates a new [`Matrix4`] that represents a rotation transformation around the x-axis.
     pub fn op_rotate_x(rad: f32) -> Self {
         let s = rad.sin();
         let c = rad.cos();
@@ -785,7 +785,7 @@ impl Matrix4 {
 
         r
     }
-    /// Creates a new [Matrix4] that represents a rotation transformation around the y-axis.
+    /// Creates a new [`Matrix4`] that represents a rotation transformation around the y-axis.
     pub fn op_rotate_y(rad: f32) -> Self {
         let s = rad.sin();
         let c = rad.cos();
@@ -799,7 +799,7 @@ impl Matrix4 {
 
         r
     }
-    /// Creates a new [Matrix4] that represents a rotation transformation around the z-axis.
+    /// Creates a new [`Matrix4`] that represents a rotation transformation around the z-axis.
     pub fn op_rotate_z(rad: f32) -> Self {
         let s = rad.sin();
         let c = rad.cos();
@@ -813,7 +813,7 @@ impl Matrix4 {
 
         r
     }
-    /// Creates a new [Matrix4] that represents a shear transformation.
+    /// Creates a new [`Matrix4`] that represents a shear transformation.
     pub fn op_shear(xy: f32, xz: f32, yx: f32, yz: f32, zx: f32, zy: f32) -> Self {
         let mut s = Self::identity();
 
@@ -836,7 +836,7 @@ impl Matrix4 {
     pub fn set(&mut self, r: usize, c: usize, val: f32) {
         self.data[(r * 4) + c] = val;
     }
-    /// Creates a new [Matrix4] that is the result of the addition of the matrices.
+    /// Creates a new [`Matrix4`] that is the result of the addition of the matrices.
     pub fn add(a: &Self, b: &Self) -> Self {
         let mut c = Self::zero();
 
@@ -846,7 +846,7 @@ impl Matrix4 {
 
         c
     }
-    /// Creates a new [Matrix4] that is the result of the subtraction of the matrices.
+    /// Creates a new [`Matrix4`] that is the result of the subtraction of the matrices.
     pub fn sub(a: &Self, b: &Self) -> Self {
         let mut c = Self::zero();
 
@@ -856,7 +856,7 @@ impl Matrix4 {
 
         c
     }
-    /// Creates a new [Matrix4] that is the result of the multiplication of the matrices.
+    /// Creates a new [`Matrix4`] that is the result of the multiplication of the matrices.
     pub fn mul(a: &Self, b: &Self) -> Self {
         let mut c = Self::zero();
 
@@ -877,21 +877,21 @@ impl Matrix4 {
 
         c
     }
-    /// Returns the result of the multiplication of the matrix by the given [Vec3] using the w
+    /// Returns the result of the multiplication of the matrix by the given [`Vec3`] using the w
     /// value for the fourth component of the vector.
     pub fn mul_vec3(m: &Self, v: &Vec3, w: f32) -> Vec3 {
         let r = Self::mul_vec4(m, &Vec4::from(v.x, v.y, v.z, w));
         Vec3::from(r.x, r.y, r.z)
     }
-    /// Returns the result of the multiplication of the matrix by the given point [Vec3].
+    /// Returns the result of the multiplication of the matrix by the given point [`Vec3`].
     pub fn mul_vec3_point(m: &Self, v: &Vec3) -> Vec3 {
         Self::mul_vec3(m, v, 1.0)
     }
-    /// Returns the result of the multiplication of the matrix by the given directional [Vec3].
+    /// Returns the result of the multiplication of the matrix by the given directional [`Vec3`].
     pub fn mul_vec3_dir(m: &Self, v: &Vec3) -> Vec3 {
         Self::mul_vec3(m, v, 0.0)
     }
-    /// Returns the result of the multiplication of the matrix by the given [Vec4].
+    /// Returns the result of the multiplication of the matrix by the given [`Vec4`].
     pub fn mul_vec4(m: &Self, v: &Vec4) -> Vec4 {
         let x = (m.data[0] * v.x) + (m.data[1] * v.y) + (m.data[2] * v.z) + (m.data[3] * v.w);
         let y = (m.data[4] * v.x) + (m.data[5] * v.y) + (m.data[6] * v.z) + (m.data[7] * v.w);
@@ -1182,48 +1182,48 @@ pub struct Ray {
 }
 
 impl Ray {
-    /// Creates a new default [Ray].
+    /// Creates a new default [`Ray`].
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Ray] initialized to zero values.
+    /// Creates a new [`Ray`] initialized to zero values.
     pub fn zero() -> Self {
         Self::default()
     }
-    /// Creates a new [Ray] directed along the x-axis.
+    /// Creates a new [`Ray`] directed along the x-axis.
     pub fn x_axis() -> Self {
         Ray::from(Vec3::zero(), Vec3::x_axis())
     }
-    /// Creates a new [Ray] directed along the negative x-axis.
+    /// Creates a new [`Ray`] directed along the negative x-axis.
     pub fn neg_x_axis() -> Self {
         Ray::from(Vec3::zero(), Vec3::neg_x_axis())
     }
-    /// Creates a new [Ray] directed along the y-axis.
+    /// Creates a new [`Ray`] directed along the y-axis.
     pub fn y_axis() -> Self {
         Ray::from(Vec3::zero(), Vec3::y_axis())
     }
-    /// Creates a new [Ray] directed along the negative y-axis.
+    /// Creates a new [`Ray`] directed along the negative y-axis.
     pub fn neg_y_axis() -> Self {
         Ray::from(Vec3::zero(), Vec3::neg_y_axis())
     }
-    /// Creates a new [Ray] directed along the z-axis.
+    /// Creates a new [`Ray`] directed along the z-axis.
     pub fn z_axis() -> Self {
         Ray::from(Vec3::zero(), Vec3::z_axis())
     }
-    /// Creates a new [Ray] directed along the negative z-axis.
+    /// Creates a new [`Ray`] directed along the negative z-axis.
     pub fn neg_z_axis() -> Self {
         Ray::from(Vec3::zero(), Vec3::neg_z_axis())
     }
-    /// Creates a new [Ray] from the given the origin and direction.
+    /// Creates a new [`Ray`] from the given the origin and direction.
     pub fn from(origin: Vec3, direction: Vec3) -> Self {
         Ray { origin, direction }
     }
-    /// Returns a [Vec3] that represents a position on the given [Ray] at t.
+    /// Returns a [`Vec3`] that represents a position on the given [`Ray`] at t.
     pub fn position(r: &Self, t: f32) -> Vec3 {
         let v = Vec3::from_scaled(&r.direction, t);
         r.origin + v
     }
-    /// Creates a new [Ray] from the transformation of a given ray by a transformation matrix.
+    /// Creates a new [`Ray`] from the transformation of a given ray by a transformation matrix.
     pub fn from_transformed(r: &Self, m: &Matrix4) -> Self {
         let origin = Matrix4::mul_vec3_point(m, &r.origin);
         let direction = Matrix4::mul_vec3_dir(m, &r.direction);

@@ -19,30 +19,30 @@ pub struct Color {
 }
 
 impl Color {
-    /// Creates a new [Color] with all components set to zero, i.e. black.
+    /// Creates a new [`Color`] with all components set to zero, i.e. black.
     pub fn new() -> Self {
         Self::default()
     }
-    /// Creates a new [Color] from the given values for the red, green and blue components.
+    /// Creates a new [`Color`] from the given values for the red, green and blue components.
     pub const fn from(r: f32, g: f32, b: f32) -> Self {
         Color { r, g, b }
     }
-    /// Creates a new [Color] from the Hadamard product of the given [Color]s.
+    /// Creates a new [`Color`] from the Hadamard product of the given [`Color`]s.
     pub fn from_hadamard(a: &Self, b: &Self) -> Self {
         Color::from(a.r * b.r, a.g * b.g, a.b * b.b)
     }
-    /// Creates a new [Color] from an existing [Color] scaled by the given value.
+    /// Creates a new [`Color`] from an existing [`Color`] scaled by the given value.
     pub fn from_scaled(c: &Self, s: f32) -> Self {
         Color::from(c.r * s, c.g * s, c.b * s)
     }
-    /// Transforms the existing [Color] to the result of the Hadamard product with
-    /// the given [Color].
+    /// Transforms the existing [`Color`] to the result of the Hadamard product with
+    /// the given [`Color`].
     pub fn hadamard(&mut self, c: &Self) {
         self.r *= c.r;
         self.g *= c.g;
         self.b *= c.b;
     }
-    /// Transforms the existing [Color] to the result of scaling the components by the
+    /// Transforms the existing [`Color`] to the result of scaling the components by the
     /// given value.
     pub fn scale(&mut self, s: f32) {
         self.r *= s;
@@ -54,7 +54,7 @@ impl Color {
 impl Add for Color {
     type Output = Color;
 
-    /// Adds the two [Color]s together returning the result.
+    /// Adds the two [`Color`]s together returning the result.
     fn add(self, rhs: Self) -> Self::Output {
         Color::from(self.r + rhs.r, self.g + rhs.g, self.b + rhs.b)
     }
@@ -63,7 +63,7 @@ impl Add for Color {
 impl Sub for Color {
     type Output = Color;
 
-    /// Subtracts the two [Color]s returning the result.
+    /// Subtracts the two [`Color`]s returning the result.
     fn sub(self, rhs: Self) -> Self::Output {
         Color::from(self.r - rhs.r, self.g - rhs.g, self.b - rhs.b)
     }
@@ -72,7 +72,7 @@ impl Sub for Color {
 impl Mul for Color {
     type Output = Color;
 
-    /// Computes the Hadamard product of the two [Color]s returning the result.
+    /// Computes the Hadamard product of the two [`Color`]s returning the result.
     fn mul(self, rhs: Self) -> Self::Output {
         Color::from_hadamard(&self, &rhs)
     }
